@@ -17,6 +17,9 @@ import {
   CheckCircle2,
   Clock,
   Truck,
+  Send,
+  Camera,
+  Save,
 } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
@@ -145,122 +148,129 @@ export function BuyerDashboard() {
   });
 
   return (
-    <div className="flex h-screen bg-slate-50">
+    <div className="flex h-screen bg-gradient-to-br from-stone-50 via-white to-amber-50">
+      {/* 3D Background Elements */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-20 -left-20 w-80 h-80 bg-emerald-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float-3d"></div>
+        <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-amber-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse-3d"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-stone-200 rounded-full mix-blend-multiply filter blur-3xl opacity-15 animate-rotate-3d"></div>
+      </div>
+
       {/* Sidebar */}
-      <div className="w-64 bg-white border-r border-slate-200 flex flex-col">
-        <div className="p-6 border-b border-slate-200">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center">
-              <Package className="w-6 h-6 text-white" />
+      <div className="w-72 bg-gradient-to-b from-white via-stone-50 to-amber-50 border-r-2 border-amber-200 flex flex-col shadow-2xl relative z-10">
+        <div className="p-8 border-b-2 border-amber-200">
+          <div className="flex items-center gap-4">
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-amber-600 flex items-center justify-center shadow-xl transform hover:scale-105 transition-transform">
+              <Package className="w-8 h-8 text-white" />
             </div>
             <div>
-              <p className="text-sm text-slate-600">Buyer</p>
-              <p className="text-slate-900">{user?.name}</p>
+              <p className="text-sm text-stone-600 font-medium">Buyer Dashboard</p>
+              <p className="text-stone-900 font-bold text-lg">{user?.name}</p>
             </div>
           </div>
         </div>
 
-        <nav className="flex-1 p-4 space-y-2">
+        <nav className="flex-1 p-6 space-y-3">
           <button
             onClick={() => setActiveView('dashboard')}
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+            className={`w-full flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 ${
               activeView === 'dashboard'
-                ? 'bg-emerald-50 text-emerald-700'
-                : 'text-slate-600 hover:bg-slate-50'
+                ? 'bg-gradient-to-r from-emerald-500 to-amber-500 text-white shadow-xl'
+                : 'text-stone-700 hover:bg-gradient-to-r hover:from-emerald-50 hover:to-amber-50 hover:shadow-lg'
             }`}
           >
-            <LayoutDashboard className="w-5 h-5" />
-            <span>Dashboard</span>
+            <LayoutDashboard className="w-6 h-6" />
+            <span className="font-semibold">Dashboard</span>
           </button>
 
           <button
             onClick={() => setActiveView('browse')}
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+            className={`w-full flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 ${
               activeView === 'browse'
-                ? 'bg-emerald-50 text-emerald-700'
-                : 'text-slate-600 hover:bg-slate-50'
+                ? 'bg-gradient-to-r from-emerald-500 to-amber-500 text-white shadow-xl'
+                : 'text-stone-700 hover:bg-gradient-to-r hover:from-emerald-50 hover:to-amber-50 hover:shadow-lg'
             }`}
           >
-            <Search className="w-5 h-5" />
-            <span>Browse Materials</span>
+            <Search className="w-6 h-6" />
+            <span className="font-semibold">Browse Materials</span>
           </button>
 
           <button
             onClick={() => setActiveView('orders')}
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+            className={`w-full flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 ${
               activeView === 'orders'
-                ? 'bg-emerald-50 text-emerald-700'
-                : 'text-slate-600 hover:bg-slate-50'
+                ? 'bg-gradient-to-r from-emerald-500 to-amber-500 text-white shadow-xl'
+                : 'text-stone-700 hover:bg-gradient-to-r hover:from-emerald-50 hover:to-amber-50 hover:shadow-lg'
             }`}
           >
-            <ShoppingCart className="w-5 h-5" />
-            <span>My Orders</span>
-            <Badge className="ml-auto bg-emerald-100 text-emerald-700 hover:bg-emerald-100">3</Badge>
+            <ShoppingCart className="w-6 h-6" />
+            <span className="font-semibold">My Orders</span>
+            <Badge className="ml-auto bg-gradient-to-r from-amber-400 to-amber-600 text-white shadow-lg animate-pulse">3</Badge>
           </button>
 
           <button
             onClick={() => setActiveView('messages')}
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+            className={`w-full flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 ${
               activeView === 'messages'
-                ? 'bg-emerald-50 text-emerald-700'
-                : 'text-slate-600 hover:bg-slate-50'
+                ? 'bg-gradient-to-r from-emerald-500 to-amber-500 text-white shadow-xl'
+                : 'text-stone-700 hover:bg-gradient-to-r hover:from-emerald-50 hover:to-amber-50 hover:shadow-lg'
             }`}
           >
-            <MessageSquare className="w-5 h-5" />
-            <span>Messages</span>
-            <Badge className="ml-auto bg-emerald-100 text-emerald-700 hover:bg-emerald-100">2</Badge>
+            <MessageSquare className="w-6 h-6" />
+            <span className="font-semibold">Messages</span>
+            <Badge className="ml-auto bg-gradient-to-r from-amber-400 to-amber-600 text-white shadow-lg animate-pulse">2</Badge>
           </button>
 
           <button
             onClick={() => setActiveView('profile')}
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+            className={`w-full flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 ${
               activeView === 'profile'
-                ? 'bg-emerald-50 text-emerald-700'
-                : 'text-slate-600 hover:bg-slate-50'
+                ? 'bg-gradient-to-r from-emerald-500 to-amber-500 text-white shadow-xl'
+                : 'text-stone-700 hover:bg-gradient-to-r hover:from-emerald-50 hover:to-amber-50 hover:shadow-lg'
             }`}
           >
-            <User className="w-5 h-5" />
-            <span>Profile</span>
+            <User className="w-6 h-6" />
+            <span className="font-semibold">Profile</span>
           </button>
         </nav>
 
-        <div className="p-4 border-t border-slate-200">
+        <div className="p-6 border-t-2 border-amber-200">
           <Button
             onClick={handleLogout}
             variant="ghost"
-            className="w-full justify-start text-red-600 hover:text-red-700 hover:bg-red-50"
+            className="w-full justify-start text-red-600 hover:text-red-700 hover:bg-red-50 rounded-xl py-4 font-semibold transition-all transform hover:scale-105"
           >
-            <LogOut className="w-5 h-5 mr-3" />
+            <LogOut className="w-6 h-6 mr-4" />
             Logout
           </Button>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col overflow-hidden">
+      <div className="flex-1 flex flex-col overflow-hidden relative z-10">
         {/* Top Bar */}
-        <div className="bg-white border-b border-slate-200 px-8 py-4 flex items-center justify-between">
-          <div className="flex-1 max-w-2xl">
+        <div className="bg-gradient-to-r from-white via-stone-50 to-amber-50 border-b-2 border-amber-200 px-10 py-6 flex items-center justify-between shadow-lg">
+          <div className="flex-1 max-w-3xl">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-6 h-6 text-stone-400" />
               <Input
                 type="text"
-                placeholder="Search materials, sellers..."
+                placeholder="Search materials, sellers, locations..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 rounded-lg"
+                className="pl-12 rounded-2xl border-2 border-stone-200 focus:border-emerald-500 focus:ring-emerald-500 h-14 text-lg shadow-lg"
               />
             </div>
           </div>
 
-          <div className="flex items-center gap-4 ml-8">
-            <button className="relative p-2 rounded-lg hover:bg-slate-100 transition-colors">
-              <Bell className="w-6 h-6 text-slate-600" />
-              <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+          <div className="flex items-center gap-6 ml-10">
+            <button className="relative p-3 rounded-2xl hover:bg-gradient-to-r hover:from-emerald-50 hover:to-amber-50 transition-all transform hover:scale-110 shadow-lg">
+              <Bell className="w-7 h-7 text-stone-600" />
+              <span className="absolute top-2 right-2 w-3 h-3 bg-gradient-to-r from-red-400 to-red-600 rounded-full animate-pulse shadow-lg"></span>
             </button>
 
-            <Avatar className="w-10 h-10">
-              <AvatarFallback className="bg-gradient-to-br from-emerald-500 to-emerald-700 text-white">
+            <Avatar className="w-14 h-14 shadow-xl border-2 border-amber-200">
+              <AvatarFallback className="bg-gradient-to-br from-emerald-500 to-amber-600 text-white text-lg font-bold">
                 {user?.name.substring(0, 2).toUpperCase()}
               </AvatarFallback>
             </Avatar>
@@ -268,31 +278,34 @@ export function BuyerDashboard() {
         </div>
 
         {/* Content Area */}
-        <div className="flex-1 overflow-y-auto p-8">
+        <div className="flex-1 overflow-y-auto p-10">
           {activeView === 'browse' && (
             <div>
-              <div className="flex items-center justify-between mb-6">
-                <h1 className="text-3xl text-slate-900">Browse Materials</h1>
+              <div className="flex items-center justify-between mb-8">
+                <div>
+                  <h1 className="text-4xl text-stone-900 font-bold mb-2">Browse Materials</h1>
+                  <p className="text-stone-600 text-lg">Discover sustainable materials for your business</p>
+                </div>
                 <Button
                   onClick={() => setShowFilters(!showFilters)}
                   variant="outline"
-                  className="rounded-lg"
+                  className="rounded-2xl border-2 border-amber-400 hover:border-emerald-500 hover:bg-gradient-to-r hover:from-emerald-50 hover:to-amber-50 px-6 py-4 text-lg font-semibold shadow-lg transform hover:scale-105 transition-all"
                 >
-                  <Filter className="w-4 h-4 mr-2" />
+                  <Filter className="w-5 h-5 mr-3" />
                   Advanced Filters
                 </Button>
               </div>
 
               {/* Category Chips */}
-              <div className="flex gap-2 mb-6 flex-wrap">
+              <div className="flex gap-3 mb-10 flex-wrap">
                 {categories.map((category) => (
                   <button
                     key={category}
                     onClick={() => setSelectedCategory(category)}
-                    className={`px-4 py-2 rounded-full transition-all ${
+                    className={`px-6 py-3 rounded-full transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 font-semibold shadow-lg ${
                       selectedCategory === category
-                        ? 'bg-emerald-600 text-white shadow-md'
-                        : 'bg-white text-slate-600 border border-slate-200 hover:border-emerald-300'
+                        ? 'bg-gradient-to-r from-emerald-500 to-amber-500 text-white shadow-xl'
+                        : 'bg-gradient-to-r from-white to-stone-50 text-stone-700 border-2 border-stone-200 hover:border-emerald-300 hover:shadow-xl'
                     }`}
                   >
                     {category}
@@ -301,51 +314,52 @@ export function BuyerDashboard() {
               </div>
 
               {/* Materials Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {filteredMaterials.map((material) => (
                   <Card
                     key={material.id}
-                    className="group cursor-pointer hover:shadow-xl transition-shadow overflow-hidden border-slate-200"
+                    className="group cursor-pointer hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-stone-200 hover:border-emerald-300 transform hover:scale-105 hover:-translate-y-2 bg-gradient-to-br from-white to-stone-50"
                     onClick={() => setSelectedMaterial(material)}
                   >
-                    <div className="relative h-48 overflow-hidden bg-slate-100">
+                    <div className="relative h-56 overflow-hidden bg-gradient-to-br from-stone-100 to-amber-100">
                       <ImageWithFallback
                         src={material.image}
                         alt={material.type}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       />
-                      <div className="absolute top-3 right-3">
-                        <Badge className="bg-emerald-600 text-white">
+                      <div className="absolute top-4 right-4">
+                        <Badge className="bg-gradient-to-r from-emerald-500 to-amber-500 text-white shadow-xl px-3 py-1 text-sm font-semibold">
                           {material.category}
                         </Badge>
                       </div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
-                    <CardContent className="p-5">
-                      <h3 className="text-lg mb-2 text-slate-900">{material.type}</h3>
-                      <p className="text-sm text-slate-600 mb-4">{material.description}</p>
+                    <CardContent className="p-6">
+                      <h3 className="text-xl mb-3 text-stone-900 font-bold leading-tight">{material.type}</h3>
+                      <p className="text-stone-600 mb-6 leading-relaxed">{material.description}</p>
 
-                      <div className="space-y-2 mb-4">
+                      <div className="space-y-3 mb-6">
                         <div className="flex items-center justify-between">
-                          <span className="text-2xl text-emerald-600">
+                          <span className="text-3xl text-emerald-600 font-bold">
                             ${material.price}
                           </span>
-                          <span className="text-sm text-slate-500">per {material.unit}</span>
+                          <span className="text-stone-500 font-medium">per {material.unit}</span>
                         </div>
 
-                        <div className="flex items-center gap-2 text-sm text-slate-600">
-                          <Package className="w-4 h-4" />
-                          <span>{material.quantity} tons available</span>
+                        <div className="flex items-center gap-3 text-stone-600">
+                          <Package className="w-5 h-5 text-amber-500" />
+                          <span className="font-medium">{material.quantity} tons available</span>
                         </div>
 
-                        <div className="flex items-center gap-2 text-sm text-slate-600">
-                          <MapPin className="w-4 h-4" />
-                          <span>{material.distance} away</span>
+                        <div className="flex items-center gap-3 text-stone-600">
+                          <MapPin className="w-5 h-5 text-emerald-500" />
+                          <span className="font-medium">{material.distance} away</span>
                         </div>
                       </div>
 
-                      <div className="flex items-center justify-between pt-4 border-t border-slate-100">
-                        <span className="text-sm text-slate-600">{material.seller}</span>
-                        <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 rounded-lg">
+                      <div className="flex items-center justify-between pt-6 border-t-2 border-stone-100">
+                        <span className="text-stone-600 font-semibold">{material.seller}</span>
+                        <Button size="sm" className="bg-gradient-to-r from-emerald-500 to-amber-500 hover:from-emerald-600 hover:to-amber-600 text-white rounded-xl px-6 py-3 font-semibold shadow-lg transform hover:scale-105 transition-all">
                           Request Deal
                         </Button>
                       </div>
@@ -358,128 +372,131 @@ export function BuyerDashboard() {
 
           {activeView === 'orders' && (
             <div>
-              <h1 className="text-3xl mb-6 text-slate-900">My Orders</h1>
+              <div className="mb-8">
+                <h1 className="text-4xl text-stone-900 font-bold mb-2">My Orders</h1>
+                <p className="text-stone-600 text-lg">Track your material procurement journey</p>
+              </div>
 
-              <div className="space-y-4">
-                <Card className="border-slate-200">
-                  <CardContent className="p-6">
-                    <div className="flex items-start justify-between mb-4">
+              <div className="space-y-8">
+                <Card className="border-2 border-stone-200 bg-gradient-to-br from-white to-stone-50 shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <CardContent className="p-8">
+                    <div className="flex items-start justify-between mb-6">
                       <div>
-                        <h3 className="text-lg mb-1 text-slate-900">Industrial Plastic Pellets</h3>
-                        <p className="text-sm text-slate-600">ABC Manufacturing • 25 tons</p>
+                        <h3 className="text-2xl mb-2 text-stone-900 font-bold">Industrial Plastic Pellets</h3>
+                        <p className="text-stone-600 text-lg">ABC Manufacturing • 25 tons</p>
                       </div>
-                      <Badge className="bg-amber-100 text-amber-700">
-                        <Clock className="w-3 h-3 mr-1" />
+                      <Badge className="bg-gradient-to-r from-amber-400 to-amber-600 text-white shadow-lg px-4 py-2 text-sm font-semibold">
+                        <Clock className="w-4 h-4 mr-2" />
                         Negotiation
                       </Badge>
                     </div>
 
                     {/* Order Stepper */}
-                    <div className="flex items-center gap-2 my-6">
+                    <div className="flex items-center gap-4 my-8">
                       <div className="flex flex-col items-center">
-                        <div className="w-10 h-10 rounded-full bg-emerald-600 flex items-center justify-center">
-                          <CheckCircle2 className="w-5 h-5 text-white" />
+                        <div className="w-14 h-14 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center shadow-xl">
+                          <CheckCircle2 className="w-7 h-7 text-white" />
                         </div>
-                        <span className="text-xs mt-2 text-slate-600">Requested</span>
+                        <span className="text-sm mt-3 text-stone-600 font-medium">Requested</span>
                       </div>
-                      <div className="flex-1 h-0.5 bg-emerald-600"></div>
+                      <div className="flex-1 h-1 bg-gradient-to-r from-emerald-500 to-amber-500 rounded-full"></div>
                       <div className="flex flex-col items-center">
-                        <div className="w-10 h-10 rounded-full bg-amber-500 flex items-center justify-center">
-                          <Clock className="w-5 h-5 text-white" />
+                        <div className="w-14 h-14 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shadow-xl animate-pulse">
+                          <Clock className="w-7 h-7 text-white" />
                         </div>
-                        <span className="text-xs mt-2 text-slate-600">Negotiation</span>
+                        <span className="text-sm mt-3 text-stone-600 font-medium">Negotiation</span>
                       </div>
-                      <div className="flex-1 h-0.5 bg-slate-200"></div>
+                      <div className="flex-1 h-1 bg-stone-200 rounded-full"></div>
                       <div className="flex flex-col items-center">
-                        <div className="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center">
-                          <CheckCircle2 className="w-5 h-5 text-slate-400" />
+                        <div className="w-14 h-14 rounded-full bg-stone-200 flex items-center justify-center">
+                          <CheckCircle2 className="w-7 h-7 text-stone-400" />
                         </div>
-                        <span className="text-xs mt-2 text-slate-600">Accepted</span>
+                        <span className="text-sm mt-3 text-stone-600 font-medium">Accepted</span>
                       </div>
-                      <div className="flex-1 h-0.5 bg-slate-200"></div>
+                      <div className="flex-1 h-1 bg-stone-200 rounded-full"></div>
                       <div className="flex flex-col items-center">
-                        <div className="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center">
-                          <Truck className="w-5 h-5 text-slate-400" />
+                        <div className="w-14 h-14 rounded-full bg-stone-200 flex items-center justify-center">
+                          <Truck className="w-7 h-7 text-stone-400" />
                         </div>
-                        <span className="text-xs mt-2 text-slate-600">Shipped</span>
+                        <span className="text-sm mt-3 text-stone-600 font-medium">Shipped</span>
                       </div>
-                      <div className="flex-1 h-0.5 bg-slate-200"></div>
+                      <div className="flex-1 h-1 bg-stone-200 rounded-full"></div>
                       <div className="flex flex-col items-center">
-                        <div className="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center">
-                          <CheckCircle2 className="w-5 h-5 text-slate-400" />
+                        <div className="w-14 h-14 rounded-full bg-stone-200 flex items-center justify-center">
+                          <CheckCircle2 className="w-7 h-7 text-stone-400" />
                         </div>
-                        <span className="text-xs mt-2 text-slate-600">Completed</span>
+                        <span className="text-sm mt-3 text-stone-600 font-medium">Completed</span>
                       </div>
                     </div>
 
-                    <div className="flex gap-2">
-                      <Button variant="outline" className="flex-1 rounded-lg">
+                    <div className="flex gap-4">
+                      <Button variant="outline" className="flex-1 rounded-xl py-4 text-lg font-semibold border-2 border-stone-300 hover:border-emerald-400 hover:bg-emerald-50 transition-all">
                         View Details
                       </Button>
-                      <Button className="flex-1 bg-emerald-600 hover:bg-emerald-700 rounded-lg">
-                        <MessageSquare className="w-4 h-4 mr-2" />
+                      <Button className="flex-1 bg-gradient-to-r from-emerald-500 to-amber-500 hover:from-emerald-600 hover:to-amber-600 text-white rounded-xl py-4 text-lg font-semibold shadow-lg transform hover:scale-105 transition-all">
+                        <MessageSquare className="w-5 h-5 mr-3" />
                         Message Seller
                       </Button>
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card className="border-slate-200">
-                  <CardContent className="p-6">
-                    <div className="flex items-start justify-between mb-4">
+                <Card className="border-2 border-stone-200 bg-gradient-to-br from-white to-amber-50 shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <CardContent className="p-8">
+                    <div className="flex items-start justify-between mb-6">
                       <div>
-                        <h3 className="text-lg mb-1 text-slate-900">Scrap Metal Mix</h3>
-                        <p className="text-sm text-slate-600">MetalWorks Inc • 50 tons</p>
+                        <h3 className="text-2xl mb-2 text-stone-900 font-bold">Scrap Metal Mix</h3>
+                        <p className="text-stone-600 text-lg">MetalWorks Inc • 50 tons</p>
                       </div>
-                      <Badge className="bg-sky-100 text-sky-700">
-                        <Truck className="w-3 h-3 mr-1" />
+                      <Badge className="bg-gradient-to-r from-sky-400 to-sky-600 text-white shadow-lg px-4 py-2 text-sm font-semibold">
+                        <Truck className="w-4 h-4 mr-2" />
                         Shipped
                       </Badge>
                     </div>
 
-                    <div className="flex items-center gap-2 my-6">
+                    <div className="flex items-center gap-4 my-8">
                       <div className="flex flex-col items-center">
-                        <div className="w-10 h-10 rounded-full bg-emerald-600 flex items-center justify-center">
-                          <CheckCircle2 className="w-5 h-5 text-white" />
+                        <div className="w-14 h-14 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center shadow-xl">
+                          <CheckCircle2 className="w-7 h-7 text-white" />
                         </div>
-                        <span className="text-xs mt-2 text-slate-600">Requested</span>
+                        <span className="text-sm mt-3 text-stone-600 font-medium">Requested</span>
                       </div>
-                      <div className="flex-1 h-0.5 bg-emerald-600"></div>
+                      <div className="flex-1 h-1 bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full"></div>
                       <div className="flex flex-col items-center">
-                        <div className="w-10 h-10 rounded-full bg-emerald-600 flex items-center justify-center">
-                          <CheckCircle2 className="w-5 h-5 text-white" />
+                        <div className="w-14 h-14 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center shadow-xl">
+                          <CheckCircle2 className="w-7 h-7 text-white" />
                         </div>
-                        <span className="text-xs mt-2 text-slate-600">Negotiation</span>
+                        <span className="text-sm mt-3 text-stone-600 font-medium">Negotiation</span>
                       </div>
-                      <div className="flex-1 h-0.5 bg-emerald-600"></div>
+                      <div className="flex-1 h-1 bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full"></div>
                       <div className="flex flex-col items-center">
-                        <div className="w-10 h-10 rounded-full bg-emerald-600 flex items-center justify-center">
-                          <CheckCircle2 className="w-5 h-5 text-white" />
+                        <div className="w-14 h-14 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center shadow-xl">
+                          <CheckCircle2 className="w-7 h-7 text-white" />
                         </div>
-                        <span className="text-xs mt-2 text-slate-600">Accepted</span>
+                        <span className="text-sm mt-3 text-stone-600 font-medium">Accepted</span>
                       </div>
-                      <div className="flex-1 h-0.5 bg-sky-600"></div>
+                      <div className="flex-1 h-1 bg-gradient-to-r from-sky-500 to-sky-600 rounded-full"></div>
                       <div className="flex flex-col items-center">
-                        <div className="w-10 h-10 rounded-full bg-sky-600 flex items-center justify-center">
-                          <Truck className="w-5 h-5 text-white" />
+                        <div className="w-14 h-14 rounded-full bg-gradient-to-br from-sky-500 to-sky-600 flex items-center justify-center shadow-xl">
+                          <Truck className="w-7 h-7 text-white" />
                         </div>
-                        <span className="text-xs mt-2 text-slate-600">Shipped</span>
+                        <span className="text-sm mt-3 text-stone-600 font-medium">Shipped</span>
                       </div>
-                      <div className="flex-1 h-0.5 bg-slate-200"></div>
+                      <div className="flex-1 h-1 bg-stone-200 rounded-full"></div>
                       <div className="flex flex-col items-center">
-                        <div className="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center">
-                          <CheckCircle2 className="w-5 h-5 text-slate-400" />
+                        <div className="w-14 h-14 rounded-full bg-stone-200 flex items-center justify-center">
+                          <CheckCircle2 className="w-7 h-7 text-stone-400" />
                         </div>
-                        <span className="text-xs mt-2 text-slate-600">Completed</span>
+                        <span className="text-sm mt-3 text-stone-600 font-medium">Completed</span>
                       </div>
                     </div>
 
-                    <div className="flex gap-2">
-                      <Button variant="outline" className="flex-1 rounded-lg">
+                    <div className="flex gap-4">
+                      <Button variant="outline" className="flex-1 rounded-xl py-4 text-lg font-semibold border-2 border-stone-300 hover:border-sky-400 hover:bg-sky-50 transition-all">
                         Track Shipment
                       </Button>
-                      <Button className="flex-1 bg-emerald-600 hover:bg-emerald-700 rounded-lg">
-                        <MessageSquare className="w-4 h-4 mr-2" />
+                      <Button className="flex-1 bg-gradient-to-r from-emerald-500 to-amber-500 hover:from-emerald-600 hover:to-amber-600 text-white rounded-xl py-4 text-lg font-semibold shadow-lg transform hover:scale-105 transition-all">
+                        <MessageSquare className="w-5 h-5 mr-3" />
                         Message Seller
                       </Button>
                     </div>
@@ -491,76 +508,90 @@ export function BuyerDashboard() {
 
           {activeView === 'dashboard' && (
             <div>
-              <h1 className="text-3xl mb-6 text-slate-900">Dashboard</h1>
+              <div className="mb-8">
+                <h1 className="text-4xl text-stone-900 font-bold mb-2">Welcome back, {user?.name}!</h1>
+                <p className="text-stone-600 text-lg">Here's what's happening with your sustainable material sourcing</p>
+              </div>
 
               {/* Stats Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-                <Card className="border-slate-200">
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between mb-2">
-                      <p className="text-sm text-slate-600">Active Orders</p>
-                      <ShoppingCart className="w-5 h-5 text-emerald-600" />
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <Card className="border-2 border-stone-200 hover:border-emerald-300 bg-gradient-to-br from-white to-stone-50 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-2">
+                  <CardContent className="p-8">
+                    <div className="flex items-center justify-between mb-4">
+                      <p className="text-stone-600 font-semibold text-lg">Active Orders</p>
+                      <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center shadow-lg">
+                        <ShoppingCart className="w-6 h-6 text-white" />
+                      </div>
                     </div>
-                    <p className="text-3xl text-slate-900">3</p>
-                    <p className="text-sm text-emerald-600 mt-2">+2 this month</p>
+                    <p className="text-4xl text-stone-900 font-bold mb-2">3</p>
+                    <p className="text-emerald-600 font-semibold">+2 this month</p>
                   </CardContent>
                 </Card>
 
-                <Card className="border-slate-200">
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between mb-2">
-                      <p className="text-sm text-slate-600">Total Saved</p>
-                      <DollarSign className="w-5 h-5 text-emerald-600" />
+                <Card className="border-2 border-stone-200 hover:border-amber-300 bg-gradient-to-br from-white to-amber-50 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-2">
+                  <CardContent className="p-8">
+                    <div className="flex items-center justify-between mb-4">
+                      <p className="text-stone-600 font-semibold text-lg">Total Saved</p>
+                      <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shadow-lg">
+                        <DollarSign className="w-6 h-6 text-white" />
+                      </div>
                     </div>
-                    <p className="text-3xl text-slate-900">$24.5K</p>
-                    <p className="text-sm text-emerald-600 mt-2">vs virgin materials</p>
+                    <p className="text-4xl text-stone-900 font-bold mb-2">$24.5K</p>
+                    <p className="text-amber-600 font-semibold">vs virgin materials</p>
                   </CardContent>
                 </Card>
 
-                <Card className="border-slate-200">
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between mb-2">
-                      <p className="text-sm text-slate-600">Materials Purchased</p>
-                      <Package className="w-5 h-5 text-emerald-600" />
+                <Card className="border-2 border-stone-200 hover:border-emerald-300 bg-gradient-to-br from-white to-stone-50 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-2">
+                  <CardContent className="p-8">
+                    <div className="flex items-center justify-between mb-4">
+                      <p className="text-stone-600 font-semibold text-lg">Materials Purchased</p>
+                      <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center shadow-lg">
+                        <Package className="w-6 h-6 text-white" />
+                      </div>
                     </div>
-                    <p className="text-3xl text-slate-900">120</p>
-                    <p className="text-sm text-slate-600 mt-2">tons total</p>
+                    <p className="text-4xl text-stone-900 font-bold mb-2">120</p>
+                    <p className="text-stone-600 font-semibold">tons total</p>
                   </CardContent>
                 </Card>
 
-                <Card className="border-slate-200">
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between mb-2">
-                      <p className="text-sm text-slate-600">Avg. Discount</p>
-                      <TrendingUp className="w-5 h-5 text-emerald-600" />
+                <Card className="border-2 border-stone-200 hover:border-amber-300 bg-gradient-to-br from-white to-amber-50 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-2">
+                  <CardContent className="p-8">
+                    <div className="flex items-center justify-between mb-4">
+                      <p className="text-stone-600 font-semibold text-lg">Avg. Discount</p>
+                      <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shadow-lg">
+                        <TrendingUp className="w-6 h-6 text-white" />
+                      </div>
                     </div>
-                    <p className="text-3xl text-slate-900">35%</p>
-                    <p className="text-sm text-emerald-600 mt-2">below market</p>
+                    <p className="text-4xl text-stone-900 font-bold mb-2">35%</p>
+                    <p className="text-amber-600 font-semibold">below market</p>
                   </CardContent>
                 </Card>
               </div>
 
               {/* Recently Added Materials */}
               <div className="mb-8">
-                <h2 className="text-xl mb-4 text-slate-900">Recently Added Materials</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <h2 className="text-2xl mb-6 text-stone-900 font-bold">Recently Added Materials</h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                   {mockMaterials.slice(0, 3).map((material) => (
                     <Card
                       key={material.id}
-                      className="group cursor-pointer hover:shadow-lg transition-shadow border-slate-200"
+                      className="group cursor-pointer hover:shadow-2xl transition-all duration-300 border-2 border-stone-200 hover:border-emerald-300 bg-gradient-to-br from-white to-stone-50 transform hover:scale-105 hover:-translate-y-2"
                     >
-                      <div className="relative h-40 overflow-hidden bg-slate-100">
+                      <div className="relative h-48 overflow-hidden bg-gradient-to-br from-stone-100 to-amber-100 rounded-t-lg">
                         <ImageWithFallback
                           src={material.image}
                           alt={material.type}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                         />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       </div>
-                      <CardContent className="p-4">
-                        <h3 className="mb-2 text-slate-900">{material.type}</h3>
+                      <CardContent className="p-6">
+                        <h3 className="mb-3 text-stone-900 font-bold text-lg">{material.type}</h3>
                         <div className="flex items-center justify-between">
-                          <span className="text-emerald-600">${material.price}/{material.unit}</span>
-                          <Badge className="bg-emerald-100 text-emerald-700">{material.category}</Badge>
+                          <span className="text-emerald-600 font-bold text-xl">${material.price}/{material.unit}</span>
+                          <Badge className="bg-gradient-to-r from-emerald-500 to-amber-500 text-white shadow-lg px-3 py-1 font-semibold">
+                            {material.category}
+                          </Badge>
                         </div>
                       </CardContent>
                     </Card>
@@ -572,49 +603,292 @@ export function BuyerDashboard() {
 
           {activeView === 'messages' && (
             <div>
-              <h1 className="text-3xl mb-6 text-slate-900">Messages</h1>
-              <Card className="border-slate-200">
-                <CardContent className="p-6">
-                  <div className="text-center py-12">
-                    <MessageSquare className="w-16 h-16 text-slate-300 mx-auto mb-4" />
-                    <p className="text-lg text-slate-600 mb-2">No messages yet</p>
-                    <p className="text-sm text-slate-500">
-                      Start a conversation by requesting a deal on materials
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
+              <div className="mb-8">
+                <h1 className="text-4xl text-stone-900 font-bold mb-2">Messages</h1>
+                <p className="text-stone-600 text-lg">Stay connected with your sellers and buyers</p>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                {/* Conversations List */}
+                <div className="lg:col-span-1">
+                  <Card className="border-2 border-stone-200 bg-gradient-to-br from-white to-stone-50 shadow-xl hover:shadow-2xl transition-all duration-300">
+                    <CardHeader className="pb-4">
+                      <CardTitle className="text-xl text-stone-900 font-bold">Conversations</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-emerald-50 to-amber-50 border-2 border-emerald-200 cursor-pointer hover:shadow-lg transform hover:scale-105 transition-all duration-300">
+                        <Avatar className="w-12 h-12 shadow-lg">
+                          <AvatarImage src="/api/placeholder/40/40" />
+                          <AvatarFallback className="bg-gradient-to-br from-emerald-500 to-emerald-600 text-white font-bold">AM</AvatarFallback>
+                        </Avatar>
+                        <div className="flex-1">
+                          <h4 className="font-semibold text-stone-900">ABC Manufacturing</h4>
+                          <p className="text-sm text-stone-600 truncate">Can we discuss the pricing for...</p>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-xs text-stone-500">2h ago</p>
+                          <Badge className="bg-gradient-to-r from-emerald-500 to-amber-500 text-white text-xs mt-1">2</Badge>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-4 p-4 rounded-xl bg-white border-2 border-stone-200 cursor-pointer hover:shadow-lg transform hover:scale-105 transition-all duration-300">
+                        <Avatar className="w-12 h-12 shadow-lg">
+                          <AvatarImage src="/api/placeholder/40/40" />
+                          <AvatarFallback className="bg-gradient-to-br from-sky-500 to-sky-600 text-white font-bold">MW</AvatarFallback>
+                        </Avatar>
+                        <div className="flex-1">
+                          <h4 className="font-semibold text-stone-900">MetalWorks Inc</h4>
+                          <p className="text-sm text-stone-600 truncate">Shipment has been dispatched...</p>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-xs text-stone-500">1d ago</p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-4 p-4 rounded-xl bg-white border-2 border-stone-200 cursor-pointer hover:shadow-lg transform hover:scale-105 transition-all duration-300">
+                        <Avatar className="w-12 h-12 shadow-lg">
+                          <AvatarImage src="/api/placeholder/40/40" />
+                          <AvatarFallback className="bg-gradient-to-br from-amber-500 to-amber-600 text-white font-bold">GR</AvatarFallback>
+                        </Avatar>
+                        <div className="flex-1">
+                          <h4 className="font-semibold text-stone-900">Green Recycle Co</h4>
+                          <p className="text-sm text-stone-600 truncate">New materials available...</p>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-xs text-stone-500">3d ago</p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                {/* Chat Area */}
+                <div className="lg:col-span-2">
+                  <Card className="border-2 border-stone-200 bg-gradient-to-br from-white to-stone-50 shadow-xl hover:shadow-2xl transition-all duration-300">
+                    <CardHeader className="pb-4 border-b border-stone-200">
+                      <div className="flex items-center gap-4">
+                        <Avatar className="w-12 h-12 shadow-lg">
+                          <AvatarImage src="/api/placeholder/40/40" />
+                          <AvatarFallback className="bg-gradient-to-br from-emerald-500 to-emerald-600 text-white font-bold">AM</AvatarFallback>
+                        </Avatar>
+                        <div>
+                          <h3 className="text-xl font-bold text-stone-900">ABC Manufacturing</h3>
+                          <p className="text-stone-600">Online • Industrial Plastic Pellets</p>
+                        </div>
+                      </div>
+                    </CardHeader>
+                    <CardContent className="p-0">
+                      {/* Messages */}
+                      <div className="h-96 overflow-y-auto p-6 space-y-4">
+                        <div className="flex gap-4">
+                          <Avatar className="w-10 h-10 shadow-lg">
+                            <AvatarImage src="/api/placeholder/40/40" />
+                            <AvatarFallback className="bg-gradient-to-br from-emerald-500 to-emerald-600 text-white font-bold">AM</AvatarFallback>
+                          </Avatar>
+                          <div className="bg-gradient-to-r from-emerald-50 to-amber-50 p-4 rounded-2xl rounded-tl-md border-2 border-emerald-200 max-w-xs">
+                            <p className="text-stone-900">Hi! We have 25 tons of industrial plastic pellets available. The quality is premium grade A.</p>
+                            <p className="text-xs text-stone-500 mt-2">10:30 AM</p>
+                          </div>
+                        </div>
+
+                        <div className="flex gap-4 justify-end">
+                          <div className="bg-gradient-to-r from-emerald-500 to-amber-500 p-4 rounded-2xl rounded-tr-md text-white max-w-xs shadow-lg">
+                            <p>That sounds great! What's your best price per ton?</p>
+                            <p className="text-xs opacity-75 mt-2">10:35 AM</p>
+                          </div>
+                          <Avatar className="w-10 h-10 shadow-lg">
+                            <AvatarImage src="/api/placeholder/40/40" />
+                            <AvatarFallback className="bg-gradient-to-br from-stone-500 to-stone-600 text-white font-bold">BU</AvatarFallback>
+                          </Avatar>
+                        </div>
+
+                        <div className="flex gap-4">
+                          <Avatar className="w-10 h-10 shadow-lg">
+                            <AvatarImage src="/api/placeholder/40/40" />
+                            <AvatarFallback className="bg-gradient-to-br from-emerald-500 to-emerald-600 text-white font-bold">AM</AvatarFallback>
+                          </Avatar>
+                          <div className="bg-gradient-to-r from-emerald-50 to-amber-50 p-4 rounded-2xl rounded-tl-md border-2 border-emerald-200 max-w-xs">
+                            <p className="text-stone-900">We can offer $450 per ton for bulk orders. This includes delivery to your facility.</p>
+                            <p className="text-xs text-stone-500 mt-2">10:40 AM</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Message Input */}
+                      <div className="p-6 border-t border-stone-200 bg-gradient-to-r from-stone-50 to-stone-100">
+                        <div className="flex gap-4">
+                          <Input
+                            placeholder="Type your message..."
+                            className="flex-1 rounded-xl border-2 border-stone-300 focus:border-emerald-400 focus:ring-emerald-400 py-4 text-lg"
+                          />
+                          <Button className="bg-gradient-to-r from-emerald-500 to-amber-500 hover:from-emerald-600 hover:to-amber-600 text-white rounded-xl px-8 py-4 text-lg font-semibold shadow-lg transform hover:scale-105 transition-all">
+                            <Send className="w-5 h-5" />
+                          </Button>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
             </div>
           )}
 
           {activeView === 'profile' && (
             <div>
-              <h1 className="text-3xl mb-6 text-slate-900">Profile Settings</h1>
-              <Card className="border-slate-200 max-w-2xl">
-                <CardContent className="p-6">
-                  <div className="space-y-4">
-                    <div>
-                      <label className="text-sm text-slate-700 mb-2 block">Company Name</label>
-                      <Input defaultValue={user?.name} className="rounded-lg" />
-                    </div>
-                    <div>
-                      <label className="text-sm text-slate-700 mb-2 block">Email</label>
-                      <Input type="email" defaultValue="buyer@company.com" className="rounded-lg" />
-                    </div>
-                    <div>
-                      <label className="text-sm text-slate-700 mb-2 block">Industry</label>
-                      <Input defaultValue="Manufacturing" className="rounded-lg" />
-                    </div>
-                    <div>
-                      <label className="text-sm text-slate-700 mb-2 block">Location</label>
-                      <Input defaultValue="San Francisco, CA" className="rounded-lg" />
-                    </div>
-                    <Button className="bg-emerald-600 hover:bg-emerald-700 rounded-lg">
-                      Save Changes
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
+              <div className="mb-8">
+                <h1 className="text-4xl text-stone-900 font-bold mb-2">Profile Settings</h1>
+                <p className="text-stone-600 text-lg">Manage your account and preferences</p>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                {/* Profile Picture and Basic Info */}
+                <div className="lg:col-span-1">
+                  <Card className="border-2 border-stone-200 bg-gradient-to-br from-white to-stone-50 shadow-xl hover:shadow-2xl transition-all duration-300">
+                    <CardContent className="p-8 text-center">
+                      <div className="relative mb-6">
+                        <Avatar className="w-24 h-24 mx-auto shadow-2xl border-4 border-white">
+                          <AvatarImage src="/api/placeholder/96/96" />
+                          <AvatarFallback className="bg-gradient-to-br from-emerald-500 to-amber-500 text-white text-2xl font-bold">
+                            {user?.name?.split(' ').map(n => n[0]).join('')}
+                          </AvatarFallback>
+                        </Avatar>
+                        <Button
+                          size="sm"
+                          className="absolute bottom-0 right-1/2 translate-x-12 bg-gradient-to-r from-emerald-500 to-amber-500 hover:from-emerald-600 hover:to-amber-600 text-white rounded-full w-8 h-8 p-0 shadow-lg transform hover:scale-110 transition-all"
+                        >
+                          <Camera className="w-4 h-4" />
+                        </Button>
+                      </div>
+                      <h3 className="text-xl font-bold text-stone-900 mb-1">{user?.name}</h3>
+                      <p className="text-stone-600 mb-4">Buyer Account</p>
+                      <Badge className="bg-gradient-to-r from-emerald-500 to-amber-500 text-white shadow-lg px-4 py-2 font-semibold">
+                        Verified Buyer
+                      </Badge>
+                    </CardContent>
+                  </Card>
+
+                  {/* Quick Stats */}
+                  <Card className="border-2 border-stone-200 bg-gradient-to-br from-white to-stone-50 shadow-xl hover:shadow-2xl transition-all duration-300 mt-6">
+                    <CardHeader className="pb-4">
+                      <CardTitle className="text-lg text-stone-900 font-bold">Quick Stats</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div className="flex justify-between items-center">
+                        <span className="text-stone-600">Total Orders</span>
+                        <span className="font-bold text-stone-900">12</span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-stone-600">Materials Saved</span>
+                        <span className="font-bold text-stone-900">120 tons</span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-stone-600">Avg. Savings</span>
+                        <span className="font-bold text-emerald-600">35%</span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-stone-600">Member Since</span>
+                        <span className="font-bold text-stone-900">Jan 2024</span>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                {/* Settings Form */}
+                <div className="lg:col-span-2">
+                  <Card className="border-2 border-stone-200 bg-gradient-to-br from-white to-stone-50 shadow-xl hover:shadow-2xl transition-all duration-300">
+                    <CardHeader className="pb-6">
+                      <CardTitle className="text-2xl text-stone-900 font-bold">Account Information</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-8">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-2">
+                          <label className="text-sm font-semibold text-stone-700">Company Name</label>
+                          <Input
+                            defaultValue={user?.name}
+                            className="rounded-xl border-2 border-stone-300 focus:border-emerald-400 focus:ring-emerald-400 py-4 text-lg"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <label className="text-sm font-semibold text-stone-700">Contact Person</label>
+                          <Input
+                            defaultValue="John Smith"
+                            className="rounded-xl border-2 border-stone-300 focus:border-emerald-400 focus:ring-emerald-400 py-4 text-lg"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-2">
+                          <label className="text-sm font-semibold text-stone-700">Email Address</label>
+                          <Input
+                            type="email"
+                            defaultValue="buyer@company.com"
+                            className="rounded-xl border-2 border-stone-300 focus:border-emerald-400 focus:ring-emerald-400 py-4 text-lg"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <label className="text-sm font-semibold text-stone-700">Phone Number</label>
+                          <Input
+                            type="tel"
+                            defaultValue="+1 (555) 123-4567"
+                            className="rounded-xl border-2 border-stone-300 focus:border-emerald-400 focus:ring-emerald-400 py-4 text-lg"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-2">
+                          <label className="text-sm font-semibold text-stone-700">Industry</label>
+                          <Input
+                            defaultValue="Manufacturing"
+                            className="rounded-xl border-2 border-stone-300 focus:border-emerald-400 focus:ring-emerald-400 py-4 text-lg"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <label className="text-sm font-semibold text-stone-700">Company Size</label>
+                          <Input
+                            defaultValue="100-500 employees"
+                            className="rounded-xl border-2 border-stone-300 focus:border-emerald-400 focus:ring-emerald-400 py-4 text-lg"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="space-y-2">
+                        <label className="text-sm font-semibold text-stone-700">Business Address</label>
+                        <Input
+                          defaultValue="123 Industrial Way, San Francisco, CA 94105"
+                          className="rounded-xl border-2 border-stone-300 focus:border-emerald-400 focus:ring-emerald-400 py-4 text-lg"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <label className="text-sm font-semibold text-stone-700">Preferred Material Types</label>
+                        <div className="flex flex-wrap gap-3">
+                          {['Plastic', 'Metal', 'Paper', 'Glass', 'Organic'].map((type) => (
+                            <Badge
+                              key={type}
+                              variant="outline"
+                              className="cursor-pointer border-2 border-stone-300 hover:border-emerald-400 hover:bg-emerald-50 px-4 py-2 text-sm font-semibold transition-all"
+                            >
+                              {type}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="flex gap-4 pt-6">
+                        <Button className="bg-gradient-to-r from-emerald-500 to-amber-500 hover:from-emerald-600 hover:to-amber-600 text-white rounded-xl px-8 py-4 text-lg font-semibold shadow-lg transform hover:scale-105 transition-all">
+                          <Save className="w-5 h-5 mr-3" />
+                          Save Changes
+                        </Button>
+                        <Button variant="outline" className="rounded-xl px-8 py-4 text-lg font-semibold border-2 border-stone-300 hover:border-stone-400 hover:bg-stone-50 transition-all">
+                          Cancel
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
             </div>
           )}
         </div>
